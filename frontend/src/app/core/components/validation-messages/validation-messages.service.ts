@@ -22,7 +22,7 @@ export class ValidationService {
   emailValidator(control: any): any {
     // RFC 2822 compliant regex
     if (
-      
+
       control.value.match(
         // eslint-disable-next-line max-len
         /[a-z0-9!#$%&"*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&"*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
@@ -42,7 +42,7 @@ export class ValidationService {
       return { invalidMobile: true };
     }
   }
-  MustMatch(controlName: string, matchingControlName: string): any {
+  mustMatch(controlName: string, matchingControlName: string): any {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];

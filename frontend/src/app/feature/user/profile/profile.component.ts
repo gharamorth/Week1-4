@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
         confirmPassword: ["", Validators.required]
       },
       {
-        validator: this.validationService.MustMatch("password", "confirmPassword")
+        validator: this.validationService.mustMatch("password", "confirmPassword")
       }
     );
   }
