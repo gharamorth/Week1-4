@@ -16,22 +16,33 @@ app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
 // MongoDB connection
-console.log('connection string', environment.mongodb.uri);
-console.log('secret', environment.secret);
+/* eslint no-console: "error" */
+// console.log('connection string', environment.mongodb.uri);
+// console.log('secret', environment.secret);
 mongoose.connect(environment.mongodb.uri, {
   useUnifiedTopology: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
 });
 mongoose.Promise = global.Promise;
 
 // On connection error
+/* eslint no-console: "error" */
+
+// custom console
 mongoose.connection.on('error', (error) => {
+  /* eslint-disable no-console */
   console.log('Database error: ', error);
+  /* eslint-enable no-console */
 });
 
 // On successful connection
+/* eslint no-console: "error" */
+
+// custom console
 mongoose.connection.on('connected', () => {
+  /* eslint-disable no-console */
   console.log('Connected to database');
+  /* eslint-enable no-console */
 });
 
 // addtional configuration when serving Angular SPA (static reource and Anugalr routing)
@@ -45,7 +56,7 @@ const allowedExt = [
   '.woff',
   '.ttf',
   '.svg',
-  '.webmanifest'
+  '.webmanifest',
 ];
 
 // Import routes
@@ -59,12 +70,12 @@ app.use(
     getToken: (req) => {
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
         return req.headers.authorization.split(' ')[1];
-      } else if (req.query && req.query.token) {
+      } if (req.query && req.query.token) {
         return req.query.token;
       }
       return null;
-    }
-  }).unless({ path: ['/api/user/authenticate', '/api/users', '/index.html'] })
+    },
+  }).unless({ path: ['/api/user/authenticate', '/api/users', '/index.html'] }),
 );
 
 // Use Api routes in the App
@@ -81,7 +92,10 @@ app.get('*', (req, res) => {
 const HOST = '0.0.0.0';
 // start server
 // Launch app to listen to specified port
+/* eslint no-console: "error" */
 const server = app.listen(process.env.EXPRESS_PORT || 3000, HOST, () => {
   const PORT = server.address().port;
+  /* eslint-disable no-console */
   console.log(`Running  on http://${HOST}:${PORT}`);
+  /* eslint-enable no-console */
 });

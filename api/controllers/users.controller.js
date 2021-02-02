@@ -11,13 +11,13 @@ exports.index = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: 'Bad Request.'
+        error: 'Bad Request.',
       });
     } else {
       res.json({
         status: 'success',
         message: 'Users retrieved successfully',
-        data: users
+        data: users,
       });
     }
   });
@@ -28,12 +28,12 @@ exports.new = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        message: err
+        message: err,
       });
     } else if (users && users.length > 0) {
       res.status(400).send({
         status: 'error',
-        message: `${req.body.username} is already taken`
+        message: `${req.body.username} is already taken`,
       });
     } else {
       const user = new User();
@@ -49,12 +49,12 @@ exports.new = (req, res) => {
         if (saveErr) {
           res.status(400).json({
             status: 'error',
-            error: err
+            error: err,
           });
         }
         res.json({
           message: 'New user created!',
-          data: user
+          data: user,
         });
       });
     }
@@ -66,12 +66,12 @@ exports.view = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
     res.json({
       message: 'User details loading..',
-      data: user
+      data: user,
     });
   });
 };
@@ -85,15 +85,15 @@ exports.update = (req, res) => {
       if (err) {
         res.status(400).json({
           status: 'error',
-          error: err
+          error: err,
         });
       }
 
       res.json({
         message: 'User Info updated',
-        data: user
+        data: user,
       });
-    }
+    },
   );
 };
 // Handle delete user
@@ -102,12 +102,12 @@ exports.delete = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
     res.json({
       status: 'success',
-      message: 'User deleted'
+      message: 'User deleted',
     });
   });
 };
@@ -117,26 +117,28 @@ exports.authenticate = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
 
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
       // authentication successful
+      /* eslint no-underscore-dangle: 0 */
+      /* eslint no-param-reassign: "error" */
       user.token = jwt.sign({ sub: user._id }, environment.secret, {
-        algorithm: 'HS256'
+        algorithm: 'HS256',
       });
       delete user.password;
       res.json({
         status: 'success',
         message: 'Users retrieved successfully',
-        data: user
+        data: user,
       });
     } else {
       // authentication failed
       res.status(401).send({
         status: 'error',
-        message: 'User name or password is invalid.'
+        message: 'User name or password is invalid.',
       });
     }
   });
@@ -147,7 +149,7 @@ exports.changePassword = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
 
@@ -160,14 +162,14 @@ exports.changePassword = (req, res) => {
         if (saveErr) res.json(saveErr);
         res.status(202).send({
           status: 'success',
-          message: 'Password Updated successfully'
+          message: 'Password Updated successfully',
         });
       });
     } else {
       // authentication failed
       res.status(401).send({
         status: 'error',
-        message: 'Old password is wrong.'
+        message: 'Old password is wrong.',
       });
     }
   });

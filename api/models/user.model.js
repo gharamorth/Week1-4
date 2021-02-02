@@ -3,27 +3,27 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   lastName: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   token: String,
   email: String,
   mobile: String,
   create_date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 // Export User model
 const User = mongoose.model('user', userSchema);

@@ -7,13 +7,13 @@ exports.index = (req, res) => {
     if (err) {
       res.json({
         status: 'error',
-        message: err
+        message: err,
       });
     }
     res.json({
       status: 'success',
       message: 'Contacts retrieved successfully',
-      data: contacts
+      data: contacts,
     });
   });
 };
@@ -24,13 +24,13 @@ exports.new = (req, res) => {
     if (err) {
       res.json({
         status: 'error',
-        message: err
+        message: err,
       });
     }
     if (contacts && contacts.length > 0) {
       res.status(400).send({
         status: 'error',
-        message: `${req.body.firstName} already exists`
+        message: `${req.body.firstName} already exists`,
       });
     } else {
       const contact = new Contact();
@@ -44,12 +44,12 @@ exports.new = (req, res) => {
         if (contactErr) {
           res.status(400).json({
             status: 'error',
-            error: contactErr
+            error: contactErr,
           });
         }
         res.status(201).json({
           message: 'New contact created!',
-          data: contact
+          data: contact,
         });
       });
     }
@@ -62,12 +62,12 @@ exports.view = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
     res.json({
       message: 'Contact details loading..',
-      data: contact
+      data: contact,
     });
   });
 };
@@ -82,7 +82,7 @@ exports.update = (req, res) => {
       if (err) {
         res.status(400).json({
           status: 'error',
-          error: err
+          error: err,
         });
       }
 
@@ -91,10 +91,10 @@ exports.update = (req, res) => {
         if (contactErr) res.json(contactErr);
         res.json({
           message: 'Contact Info updated',
-          data: contact
+          data: contact,
         });
       });
-    }
+    },
   );
 };
 
@@ -104,12 +104,12 @@ exports.delete = (req, res) => {
     if (err) {
       res.status(400).json({
         status: 'error',
-        error: err
+        error: err,
       });
     }
     res.json({
       status: 'success',
-      message: 'Contact deleted'
+      message: 'Contact deleted',
     });
   });
 };
