@@ -26,7 +26,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . -- file DOckerfile --tag mongo-for-webs5
+      # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     # my own stuff
     - run: npm ci
     - run: npm run build --if-present
