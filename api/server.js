@@ -89,13 +89,14 @@ app.get('*', (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const HOST = '0.0.0.0';
 // start server
 // Launch app to listen to specified port
-/* eslint no-console: "error" */
-const server = app.listen(process.env.EXPRESS_PORT || 3000, HOST, () => {
-  const PORT = server.address().port;
-  /* eslint-disable no-console */
-  console.log(`Running  on http://${HOST}:${PORT}`);
-  /* eslint-enable no-console */
+const server = app.listen(process.env.EXPRESS_PORT || 3000, process.env.EXPRESS_HOST || HOST, () => {
+
+const PORT = server.address().port;
+console.log(`Running  on http://${HOST}:${PORT}`);
 });

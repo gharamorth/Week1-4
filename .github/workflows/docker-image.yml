@@ -1,18 +1,35 @@
 name: Docker Image CI
 
 on:
+# for files within /api
   push:
     branches: [ main ]
+    ignore-paths:
+      - '!api/**'
+    run:
+      npm ci
   pull_request:
+    ignore-paths:
+      - '!api/**'
     branches: [ main ]
 
 jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+  
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    # my own stuff
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm eslint .
+    - run: npm test
+#https://github.community/t/need-help-with-conditional-workflows-using-paths/16650/3
