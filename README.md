@@ -1,5 +1,5 @@
 # DevOps-starter
 
-Dit is de starter github repository voor de DevOps course van Avans Informatica 's Hertogenbosch blok 11 DevOps.
+Docker deployment instructions:
 
-Kijk op de blackboard course om de opdrachten voor deze repository te verbeteren.
+1.
