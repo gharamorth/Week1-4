@@ -106,3 +106,26 @@ dist
 
 # TernJS port file
 .tern-port
+data/_mdb_catalog.wt
+data/collection-0--6534679410665612069.wt
+data/collection-2--6534679410665612069.wt
+data/collection-4--6534679410665612069.wt
+data/collection-7--6534679410665612069.wt
+data/diagnostic.data/metrics.2021-03-05T15-22-54Z-00000
+data/index-1--6534679410665612069.wt
+data/index-3--6534679410665612069.wt
+data/index-5--6534679410665612069.wt
+data/index-6--6534679410665612069.wt
+data/index-8--6534679410665612069.wt
+data/journal/WiredTigerLog.0000000001
+data/journal/WiredTigerPreplog.0000000001
+data/journal/WiredTigerPreplog.0000000002
+data/mongod.lock
+data/sizeStorer.wt
+data/storage.bson
+data/WiredTiger
+data/WiredTiger.lock
+data/WiredTiger.turtle
+data/WiredTiger.wt
+data/WiredTigerHS.wt
+frontend/Dockerfile
