@@ -8,12 +8,6 @@ services:
             - PORT=27017
         ports:
             - 27017:27017
-        # networks:
-        #     - mydemo
-        # provide your credentials here
-            # - MONGO_INITDB_ROOT_USERNAME=root
-            # - MONGO_INITDB_ROOT_PASSWORD=rootPassXXX
-        # command: ["docker run --name mongo -d --rm --network mydemo "]
         volumes:
             - ./data:/data/db
     api:
@@ -38,6 +32,16 @@ services:
         depends_on: 
             - database-layer
             - api
+# nginx:
+#     image: nginx:latest
+#     depends_on: 
+#         - api
+#     ports:
+#         - 4000:4000
+# networks:
+#   default:
+#     driver: bridge
+#     name: api
 
 #docker run --rm -p 4200:4200 --name frontend frontend
 #docker run --rm -p 3000:3000 --network mydemo --env DB=mongo --name api api
