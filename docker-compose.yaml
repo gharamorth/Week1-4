@@ -1,25 +1,44 @@
-services:
-    api:
-        container_name: DEVOPS_API
-        build: api/
-        ports:
-            - '3000:3000'
-        depends_on:
-            - webs5-mongo
-        links:
-            - webs5-mongo
+version: '3.9'
 
-    webs5-mongo:
+services:
+    database-layer:
         image: mongo:latest
-        container_name: mongo-for-webs5
+        container_name: mongo_devops
         environment:
-            # provide your credentials here
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=rootPassXXX
+            - PORT=27017
         ports:
-            - '27017:27017'
-        # volumes:
-            # if you wish to setup additional user accounts specific per DB or with different roles you can use following entry point
-            # - '$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/'
-        # no --auth is needed here as presence of username and password add this option automatically
-        command: mongod
+            - 27017:27017
+        # networks:
+        #     - mydemo
+        # provide your credentials here
+            # - MONGO_INITDB_ROOT_USERNAME=root
+            # - MONGO_INITDB_ROOT_PASSWORD=rootPassXXX
+        # command: ["docker run --name mongo -d --rm --network mydemo "]
+        volumes:
+            - ./data:/data/db
+    api:
+        build: ./api
+        depends_on:
+        - database-layer
+        environment:
+            - PORT=3000
+            - DB=mongo_devops
+        ports:
+            - 3000:3000
+        depends_on: 
+            - database-layer
+    frontend:
+        build: ./frontend
+        depends_on:
+        - api
+        environment:
+            - PORT=4200
+        ports:
+            - 4200:4200
+        depends_on: 
+            - database-layer
+            - api
+
+#docker run --rm -p 4200:4200 --name frontend frontend
+#docker run --rm -p 3000:3000 --network mydemo --env DB=mongo --name api api
+#docker run --name mongo -d --rm --network mydemo -v ${pwd}/data:/data/db -p 27017:27017 mongo:latest
