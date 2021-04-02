@@ -1,5 +1,2 @@
-# DevOps-starter
-
-Docker deployment instructions:
-
-1.
+# DevOps workshop
+Week 1 - 4
